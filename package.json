@@ -2,7 +2,7 @@
   "name": "websockets-chat-app",
   "version": "1.0.0",
   "description": "",
-  "main": "/src/index.js",
+  "main": "/src/api.js",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -13,7 +13,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "PORT=4000 nodemon src/index.js",
+    "start-nodemon": "PORT=4000 nodemon src/api.js",
+    "start": "./node_modules/.bin/netlify-lambda serve src",
     "build": "./node_modules/.bin/netlify-lambda build src"
   },
   "author": "Roland Levy",

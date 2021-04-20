@@ -1,4 +1,5 @@
 const path = require('path');
+const cors = require('cors');
 const express = require('express');
 const serverless = require('serverless-http');
 const socket = require('socket.io');
@@ -6,7 +7,8 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 require('dotenv').config();
-app.use(express.static('public'));
+app.use(cors());
+// app.use(express.static('public'));
 
 const server = app.listen(port, () => {
   console.log('Listening on port', port);
@@ -32,9 +34,10 @@ io.on('connection', (socket) => {
 
 const router = express.Router();
 
-router.get('/api', (req, res) => {
-  res.sendFile('public/index.html', { root: __dirname })
+router.get('/', (req, res) => {
+  res.sendFile('../public/index.html', { root: path.join(__dirname, '../public') });
 });
-app.use('/.netlify/functions/index', router);
+
+app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);
