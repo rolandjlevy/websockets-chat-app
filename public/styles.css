@@ -1,11 +1,15 @@
-body {
+:root {
+  --blue: hsl(235, 60%, 60%);
+}
+
+* {
   font-family:'Courier New', Courier, monospace;
 }
 
 h2 {
   font-size: 18px;
   padding: 10px 20px;
-  color: #575ed8;
+  color: var(--blue);
 }
 
 #chat {
@@ -36,7 +40,7 @@ h2 {
 }
 
 #output strong {
-  color: #575ed8;
+  color: var(--blue);
 }
 
 label {
@@ -59,11 +63,12 @@ input {
 }
 
 button {
-  background: #575ed8;
+  background: var(--blue);
   color: #fff;
   font-size: 18px;
   border: 0;
   padding: 12px 0;
   width: 100%;
   border-radius: 0 0 2px 2px;
+  cursor: pointer;
 }
