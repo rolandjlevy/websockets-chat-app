@@ -11,8 +11,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "PORT=3000 node index.js",
-    "dev": "PORT=4000 nodemon index.js"
+    "start": "PORT=4000 node index.js",
+    "dev": "PORT=8000 nodemon index.js"
   },
   "author": "",
   "license": "ISC"

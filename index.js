@@ -17,10 +17,8 @@ const server = app.listen(port, () => {
 // Socket setup on server
 const io = socket(server);
 
-// Set up socket.io on front end
-
 // listen for connection event
 io.on('connection', (socket) => {
   // socket variable connects client to the server
-  console.log('socket made connection', socket);
+  console.log('socket made connection. Socket ID:', socket.id);
 });
