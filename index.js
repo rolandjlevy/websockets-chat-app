@@ -3,13 +3,9 @@ const socket = require('socket.io');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// environment variables
 require('dotenv').config();
-
-// static files
 app.use(express.static('public'));
 
-// App setup
 const server = app.listen(port, () => {
   console.log('Listening on port', port);
 });

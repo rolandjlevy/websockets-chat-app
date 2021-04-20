@@ -5,23 +5,37 @@ const serverAddress = 'http://localhost:4000';
 const socket = io.connect(serverAddress);
 
 const $ = (el) => document.querySelector(el);
+const $$ = (el) => document.querySelectorAll(el);
 
 $('#send').addEventListener('click', (e) => {
   // emit data down the socket to the server
   const data = {
     message: $('#message').value,
-    handle: $('#handle').value
+    handle: $('#handle').value,
+    id: socket.id
   };
   socket.emit('chat', data);
 });
 
-$('#message').addEventListener('keypress', (e) => {
+const buttonState = { handle: false, message: false }
+const buttonEnabled = () => Object.values(buttonState).every(n => !Boolean(n));
+
+$('#message').addEventListener('keyup', (e) => {
+  buttonState['message'] = e.target.value.length;
   socket.emit('typing', $('#handle').value);
+  $('#send').disabled = buttonEnabled();
+});
+
+$('#handle').addEventListener('keyup', (e) => {
+  buttonState['handle'] = e.target.value.length;
+  socket.emit('typing', $('#handle').value);
+  $('#send').disabled = buttonEnabled();
 });
 
 // Listen for events
 socket.on('chat', (data) => {
-  $('#output').innerHTML += `<p><strong>${data.handle}</strong>: ${data.message}</p>`;
+  const person = data.id === socket.id ? ' self' : '';
+  $('#output').innerHTML += `<p class="${person}"><strong>${data.handle}</strong>: ${data.message}</p>`;
   $('#feedback').innerHTML = '';
 });
 
