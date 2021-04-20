@@ -29,12 +29,12 @@ io.on('connection', (socket) => {
   });
 });
 
-// const router = express.Router();
-// router.get('/', (req, res) => {
-//   res.json({
-//     'message': 'hello'
-//   });
-// });
-// app.use('/.netlify/functions/api', router);
+const router = express.Router();
+router.get('/', (req, res) => {
+  res.json({
+    'message': 'hello'
+  });
+});
+app.use('/.netlify/functions/index', router);
 
 module.exports.handler = serverless(app);
