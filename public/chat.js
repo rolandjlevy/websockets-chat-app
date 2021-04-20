@@ -21,14 +21,13 @@ const buttonState = { handle: false, message: false }
 const buttonEnabled = () => Object.values(buttonState).every(n => !Boolean(n));
 
 $('#message').addEventListener('keyup', (e) => {
-  buttonState['message'] = e.target.value.length;
   socket.emit('typing', $('#handle').value);
+  buttonState['message'] = e.target.value.length;
   $('#send').disabled = buttonEnabled();
 });
 
 $('#handle').addEventListener('keyup', (e) => {
   buttonState['handle'] = e.target.value.length;
-  socket.emit('typing', $('#handle').value);
   $('#send').disabled = buttonEnabled();
 });
 

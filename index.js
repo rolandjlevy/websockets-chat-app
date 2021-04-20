@@ -1,4 +1,5 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const socket = require('socket.io');
 const app = express();
 const port = process.env.PORT || 4000;
@@ -27,3 +28,13 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('typing', data);
   });
 });
+
+// const router = express.Router();
+// router.get('/', (req, res) => {
+//   res.json({
+//     'message': 'hello'
+//   });
+// });
+// app.use('/.netlify/functions/api', router);
+
+module.exports.handler = serverless(app);
