@@ -18,17 +18,17 @@ $('#send').addEventListener('click', (e) => {
 });
 
 const buttonState = { handle: false, message: false }
-const buttonEnabled = () => Object.values(buttonState).every(n => !Boolean(n));
+const buttonEnabled = () => Object.values(buttonState).every(n => Boolean(n));
 
 $('#message').addEventListener('keyup', (e) => {
   socket.emit('typing', $('#handle').value);
   buttonState['message'] = e.target.value.length;
-  $('#send').disabled = buttonEnabled();
+  $('#send').disabled = !buttonEnabled();
 });
 
 $('#handle').addEventListener('keyup', (e) => {
   buttonState['handle'] = e.target.value.length;
-  $('#send').disabled = buttonEnabled();
+  $('#send').disabled = !buttonEnabled();
 });
 
 // Listen for events
