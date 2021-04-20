@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const serverless = require('serverless-http');
 const socket = require('socket.io');
@@ -30,10 +31,9 @@ io.on('connection', (socket) => {
 });
 
 const router = express.Router();
-router.get('/', (req, res) => {
-  res.json({
-    'message': 'hello'
-  });
+
+router.get('/api', (req, res) => {
+  res.sendFile('public/index.html', { root: __dirname })
 });
 app.use('/.netlify/functions/index', router);
 
